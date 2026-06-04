@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>hiafribaba - تطبيق مواعدة</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html, body { height: 100%; background-color: #0f172a; }
+    body { overflow: hidden; }
+    #root { display: flex; height: 100%; max-width: 500px; margin: 0 auto; background-color: #0f172a; }
+    .loading { position: fixed; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #bf953f; font-size: 16px; }
+  </style>
+<link rel="preload" href="/_expo/static/css/App-019d0364b06ab0581706ca461ecfc57c.css" as="style"><link rel="stylesheet" href="/_expo/static/css/App-019d0364b06ab0581706ca461ecfc57c.css"></head>
+<body>
+  <div class="loading">⏳ جاري تحميل التطبيق...</div>
+  <div id="root"></div>
+  <script>
+    // تحميل الملفات من المسار الصحيح
+    const basePath = '/hiafribaba-dating-app';
+    
+    // جلب قائمة الملفات
+    fetch(basePath + '/_expo/static/js/web/')
+      .then(() => {
+        // الحصول على اسم ملف JS الفعلي
+        fetch(basePath + '/_expo/static/js/web/')
+          .then(res => res.text())
+          .then(html => {
+            const match = html.match(/AppEntry-[a-f0-9]+\.js/);
+            const jsFile = match ? match[0] : 'AppEntry.js';
+            
+            const cssMatch = html.match(/App-[a-f0-9]+\.css/);
+            const cssFile = cssMatch ? cssMatch[0] : 'App.css';
+            
+            // إضافة CSS
+            const link = document.createElement('link');
+            link.rel = 'stylesheet';
+            link.href = basePath + '/_expo/static/css/' + cssFile;
+            document.head.appendChild(link);
+            
+            // إضافة JS
+            const script = document.createElement('script');
+            script.src = basePath + '/_expo/static/js/web/' + jsFile;
+            document.body.appendChild(script);
+          });
+      })
+      .catch(() => {
+        // Fallback
+        const script = document.createElement('script');
+        script.src = basePath + '/_expo/static/js/web/AppEntry-f7d951f0b7355db7887f24f0d5bf5709.js';
+        document.body.appendChild(script);
+        
+        const link = document.createElement('link');
+        link.rel = 'stylesheet';
+        link.href = basePath + '/_expo/static/css/App-019d0364b06ab0581706ca461ecfc57c.css';
+        document.head.appendChild(link);
+      });
+  </script>
+<script src="/_expo/static/js/web/AppEntry-f7d951f0b7355db7887f24f0d5bf5709.js" defer></script>
+</body>
+</html>
