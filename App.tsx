@@ -1,6 +1,7 @@
 import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Platform } from 'react-native';
 import { AppProvider, useApp } from './src/context/AppContext';
 import LoginScreen from './src/screens/auth/LoginScreen';
 import RegisterScreen from './src/screens/auth/RegisterScreen';
@@ -52,9 +53,20 @@ const AppNavigator = () => {
 };
 
 const App = () => {
+  // تحديد المسار الأساسي: فقط للويب وعلى GitHub Pages
+  const getBasename = () => {
+    if (Platform.OS === 'web') {
+      // التحقق إذا كنا على GitHub Pages
+      if (typeof window !== 'undefined' && window.location.hostname.includes('github.io')) {
+        return '/hiafribaba-dating-app';
+      }
+    }
+    return '/';
+  };
+
   return (
     <AppProvider>
-      <NavigationContainer>
+      <NavigationContainer basename={getBasename()}>
         <AppNavigator />
       </NavigationContainer>
     </AppProvider>
